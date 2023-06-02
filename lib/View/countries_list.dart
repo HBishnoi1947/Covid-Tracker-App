@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
 import '../Services/states_services.dart';
+import 'detail_screen.dart';
 
 class CountriesList extends StatefulWidget {
   const CountriesList({super.key});
@@ -61,31 +62,63 @@ class _CountriesListState extends State<CountriesList> {
                   String name = snapshot.data![index]['country'];
                   if(searchController.text.isEmpty){
                     return Column(children: [
-                    ListTile(
-                      title: Text(snapshot.data![index]['country']),
-                      subtitle: Text(snapshot.data![index]['cases'].toString()),
-                      leading: Image(
-                        height: 50,
-                        width: 50,
-                        image: NetworkImage(
-                          snapshot.data![index]['countryInfo']['flag']
-                        )
-                        ),
+                    InkWell(
+                      onTap: (){
+                        Navigator.push(context, MaterialPageRoute(builder: (context){
+                          return DetailScreen(
+                            name: name,
+                            image: snapshot.data![index]['countryInfo']['flag'],
+                            totalCases: snapshot.data![index]['cases'], 
+                            totalDeaths: snapshot.data![index]['deaths'],
+                            totalRecovered: snapshot.data![index]['recovered'],
+                            activeCases: snapshot.data![index]['active'],
+                            todayCases: snapshot.data![index]['todayCases'],
+                            todayDeaths: snapshot.data![index]['todayDeaths'],
+                          );
+                        }));
+                      },
+                      child: ListTile(
+                        title: Text(snapshot.data![index]['country']),
+                        subtitle: Text(snapshot.data![index]['cases'].toString()),
+                        leading: Image(
+                          height: 50,
+                          width: 50,
+                          image: NetworkImage(
+                            snapshot.data![index]['countryInfo']['flag']
+                          )
+                          ),
+                      ),
                     )
                   ],);
                   }
                   else if(name.toLowerCase().contains(searchController.text.toLowerCase())){
                     return Column(children: [
-                    ListTile(
-                      title: Text(snapshot.data![index]['country']),
-                      subtitle: Text(snapshot.data![index]['cases'].toString()),
-                      leading: Image(
-                        height: 50,
-                        width: 50,
-                        image: NetworkImage(
-                          snapshot.data![index]['countryInfo']['flag']
-                        )
-                        ),
+                    InkWell(
+                      onTap: (){
+                        Navigator.push(context, MaterialPageRoute(builder: (context){
+                          return DetailScreen(
+                            name: name,
+                            image: snapshot.data![index]['countryInfo']['flag'],
+                            totalCases: snapshot.data![index]['cases'], 
+                            totalDeaths: snapshot.data![index]['deaths'],
+                            totalRecovered: snapshot.data![index]['recovered'],
+                            activeCases: snapshot.data![index]['active'],
+                            todayCases: snapshot.data![index]['todayCases'],
+                            todayDeaths: snapshot.data![index]['todayDeaths'],
+                          );
+                        }));
+                      },
+                      child: ListTile(
+                        title: Text(snapshot.data![index]['country']),
+                        subtitle: Text(snapshot.data![index]['cases'].toString()),
+                        leading: Image(
+                          height: 50,
+                          width: 50,
+                          image: NetworkImage(
+                            snapshot.data![index]['countryInfo']['flag']
+                          )
+                          ),
+                      ),
                     )
                   ],);
                   }

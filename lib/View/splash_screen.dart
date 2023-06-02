@@ -20,13 +20,13 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
   void initState() {
     super.initState();
 
-    Timer(const Duration(seconds: 5),()=> Navigator.push(context, MaterialPageRoute(builder: (context)=> const WorldStatesScreen())));
+    Timer(const Duration(seconds: 5),()=> Navigator.pushReplacement (context, MaterialPageRoute(builder: (context) => const WorldStatesScreen())));
   }
 
   @override
   void dispose(){
-    super.dispose();
     _controller.dispose();
+    super.dispose();
   }
   @override
   Widget build(BuildContext context) {
